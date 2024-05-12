@@ -1,17 +1,33 @@
 import React, { useState } from 'react';
-import './Login.css'
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import '../Css/Login.css'
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [forgotPassword, setForgotPassword] = useState(false);
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Here you can add your login logic
-    console.log('Email:', email);
-    console.log('Password:', password);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      //get data from backend and validate login
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Error logging in:', error);
+      alert('Invalid email or password');
+    }
+  };
+
+
+  const [forgotPassword, setForgotPassword] = useState(false);
 
   const handleForgotPassword = () => {
     setForgotPassword(true);
@@ -19,15 +35,25 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
+   <div>
+    <header className='header-nav'>
+      <h1>General Magic</h1>
+    </header>
+    <nav className="login-nav">
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/signup">Sign Up</Link></li>
+        </ul>
+    </nav>
+     <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div className="form-group">
           <label>Email</label>
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formData.email}
+            onChange={handleChange}
             required
           />
         </div>
@@ -35,8 +61,8 @@ const Login = () => {
           <label>Password</label>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={formData.password}
+            onChange={handleChange}
             required
           />
         </div>
@@ -48,6 +74,7 @@ const Login = () => {
         </div>
       )}
     </div>
+   </div>
   );
 };
 
