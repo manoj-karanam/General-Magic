@@ -12,6 +12,7 @@ from datetime import datetime
 from django.db import IntegrityError
 from backend.models import Registration
 
+
 @csrf_exempt
 @require_http_methods(["POST"])
 def register_user(request):
@@ -52,6 +53,7 @@ def user_login(request):
         try:
             user = Registration.objects.get(email=email)
             # Check if the hashed password matches the one provided by the user
+            print("email : " + email)
             if check_password(password, user.password):
                 # Password matches, login successful
                 return JsonResponse({"message": "Login successful"}, status=200)
@@ -63,5 +65,7 @@ def user_login(request):
             return JsonResponse({"error": "User does not exist"}, status=400)
     except KeyError:
         return JsonResponse({"error": "Bad request"}, status=400)    
+    
+   
     
 
