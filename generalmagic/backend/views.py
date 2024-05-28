@@ -13,6 +13,7 @@ from django.db import IntegrityError
 from backend.models import Registration
 
 
+
 @csrf_exempt
 @require_http_methods(["POST"])
 def register_user(request):
