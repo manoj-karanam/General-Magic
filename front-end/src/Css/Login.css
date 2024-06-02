@@ -24,7 +24,7 @@
     font-weight: bold;
   }
   
-  input[type='email'] {
+  .login-email {
     width: 95%;
     padding: 10px;
     font-size: 16px;
@@ -32,7 +32,7 @@
     border-radius: 4px;
   }
   
-  input[type='password'] {
+  .login-pwd {
     width: 95%;
     padding: 10px;
     font-size: 16px;
@@ -41,9 +41,8 @@
     margin-bottom: 5%;
   }
   
-  button[type='submit'],
-  button[type='button'] {
-    width: 50%;
+  .button-submit {
+    width: 100%;
     padding: 10px;
     font-size: 16px;
     background-color: #0077b5;
@@ -56,8 +55,7 @@
   }
 
   
-  button[type='submit']:hover,
-  button[type='button']:hover {
+  .button-submit {
     background-color: #005f8e;
     
   }
@@ -95,11 +93,11 @@
   }
 
   .login-nav {
-    background-color: #fff; /* White background */
-    color: #0077b5; /* LinkedIn blue color for text */
+    background-color: #333;
+    color: white; 
     padding: 20px;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
   }
   
   .login-nav ul {
@@ -118,7 +116,7 @@
   
   .login-nav ul li a {
     text-decoration: none;
-    color: #0077b5; /* LinkedIn blue color for links */
+    color: white;
     padding: 10px 15px;
     transition: background-color 0.3s ease;
   }

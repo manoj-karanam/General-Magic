@@ -1,0 +1,145 @@
+/* UserDetails.module.css */
+
+.userDetailsContainer,
+.experienceSection,
+.educationSection {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f7f7f7; /* Light gray background */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.userDetailsContainer h2,
+.experienceSection h3,
+.educationSection h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.formGroup {
+  margin-bottom: 15px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.formGroup textarea {
+  resize: vertical;
+}
+
+.button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #0077b5; /* Blue button color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.add_button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #2a2a2ae6; /* Blue button color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.add_button:hover {
+  background-color: #4a4a4ad5; 
+}
+
+.button:hover {
+  background-color: #27578a; /* Darker blue on hover */
+}
+
+.experienceItem,
+.educationItem {
+  border-top: 1px solid #ccc;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.experienceItem label,
+.educationItem label {
+  font-weight: bold;
+}
+
+.experienceItem select,
+.educationItem select,
+.experienceItem input[type="text"],
+.educationItem input[type="text"],
+.experienceItem input[type="date"],
+.educationItem input[type="date"],
+.experienceItem textarea,
+.educationItem textarea {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.experienceItem select,
+.educationItem select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23000000' d='M15.4 7l-7.4 7.4-7.4-7.4L1.6 8.4 10 16.8l8.4-8.4z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+}
+
+.experienceItem textarea,
+.educationItem textarea {
+  resize: vertical;
+}
+
+.header-nav {
+  background-color: #0077b5;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.dashboardNav {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
+
+.dashboardNav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.dashboardNav ul li {
+  margin: 0 15px;
+}
+
+.dashboardNav ul li a {
+  color: #fff;
+  text-decoration: none;
+}

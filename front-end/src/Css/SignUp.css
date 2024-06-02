@@ -21,9 +21,9 @@
     font-weight: bold;
   }
   
-  input[type='text'],
-  input[type='email'],
-  input[type='password'] {
+  .signup-name,
+  .signup-email,
+  .signup-pwd {
     width: 100%;
     padding: 10px;
     font-size: 16px;
@@ -31,7 +31,7 @@
     border-radius: 4px;
   }
   
-  button[type='submit'] {
+  .signup-button{
     width: 100%;
     padding: 10px;
     font-size: 16px;
@@ -42,7 +42,7 @@
     cursor: pointer;
   }
   
-  button[type='submit']:hover {
+  .signup-button:hover {
     background-color: #005f8e;
   }
 
@@ -58,36 +58,36 @@
     margin: 0;
   }
 
-  .login-nav {
-    background-color: #fff; /* White background */
-    color: #0077b5; /* LinkedIn blue color for text */
+  .signup-nav {
+    background-color: #333; 
+    color: white; 
     padding: 20px;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
   }
   
-  .login-nav ul {
+  .signup-nav ul {
     list-style-type: none;
     padding: 0;
   }
   
-  .login-nav ul li {
+  .signup-nav ul li {
     display: inline-block;
     margin-right: 20px;
   }
   
-  .login-nav ul li:last-child {
+  .signup-nav ul li:last-child {
     margin-right: 0;
   }
   
-  .login-nav ul li a {
+  .signup-nav ul li a {
     text-decoration: none;
-    color: #0077b5; /* LinkedIn blue color for links */
+    color: white; /* LinkedIn blue color for links */
     padding: 10px 15px;
     transition: background-color 0.3s ease;
   }
   
-  .login-nav ul li a:hover {
+  .signup-nav ul li a:hover {
     background-color: #f0f0f0; /* Light gray background on hover */
   }
   
