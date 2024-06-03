@@ -10,7 +10,7 @@ import json
 from django.forms.models import model_to_dict
 from datetime import datetime
 from django.db import IntegrityError
-from backend.models import Registration, UserDetails
+from backend.models import Registration, UserDetails, Experience
 
 
 
@@ -159,64 +159,86 @@ def get_user_details(request, user_id):
         # Return an error response if user details are not found
         return JsonResponse({"error": "User details not found"}, status=404)
 
-# @csrf_exempt
-# @require_http_methods(["POST"])
-# def add_experience(request):
-#     try:
-#         data = json.loads(request.body)
-#         experience_data = data['experience']
-#         user_id = experience_data['user_id']
+@csrf_exempt
+@require_http_methods(["POST"])
+def add_experience(request):
+    try:
+        data = json.loads(request.body)
         
-#         try:
-#             user = Registration.objects.get(pk=user_id)
-#         except Registration.DoesNotExist:
-#             return JsonResponse({"error": "User not found"}, status=404)
+        # Extracting data from the request JSON
+        user_id = data.get('user_id')
+        title = data.get('title')
+        employment_type = data.get('employment_type')
+        company_name = data.get('company_name')
+        location = data.get('location')
+        location_type = data.get('location_type')
+        start_date = data.get('start_date')
+        end_date = data.get('end_date')
+        job_description = data.get('job_description')
+        skills = data.get('skills')
         
-#         experience = Experience.objects.create(
-#             user=user,
-#             title=experience_data['title'],
-#             employment_type=experience_data['employment_type'],
-#             company_name=experience_data['company_name'],
-#             location=experience_data['location'],
-#             location_type=experience_data['location_type'],
-#             start_date=experience_data['start_date'],
-#             end_date=experience_data.get('end_date'),
-#             job_description=experience_data['job_description'],
-#             skills=experience_data['skills']
-#         )
-
-#         return JsonResponse({"message": "Experience added successfully"}, status=201)
-#     except KeyError:
-#         return JsonResponse({"error": "Bad request"}, status=400)
-
-# @csrf_exempt
-# @require_http_methods(["POST"])
-# def edit_experience(request, experience_id):
-#     try:
-#         data = json.loads(request.body)
-#         experience_data = data['experience']
+        # Create the experience object
+        experience = Experience.objects.create(
+            user_id=user_id,
+            title=title,
+            employment_type=employment_type,
+            company_name=company_name,
+            location=location,
+            location_type=location_type,
+            start_date=start_date,
+            end_date=end_date,
+            job_description=job_description,
+            skills=skills
+        )
         
-#         try:
-#             experience = Experience.objects.get(pk=experience_id)
-#         except Experience.DoesNotExist:
-#             return JsonResponse({"error": "Experience not found"}, status=404)
-        
-#         experience.title = experience_data.get('title', experience.title)
-#         experience.employment_type = experience_data.get('employment_type', experience.employment_type)
-#         experience.company_name = experience_data.get('company_name', experience.company_name)
-#         experience.location = experience_data.get('location', experience.location)
-#         experience.location_type = experience_data.get('location_type', experience.location_type)
-#         experience.start_date = experience_data.get('start_date', experience.start_date)
-#         experience.end_date = experience_data.get('end_date', experience.end_date)
-#         experience.job_description = experience_data.get('job_description', experience.job_description)
-#         experience.skills = experience_data.get('skills', experience.skills)
-        
-#         experience.save()
-
-#         return JsonResponse({"message": "Experience updated successfully"}, status=200)
-#     except KeyError:
-#         return JsonResponse({"error": "Bad request"}, status=400)
+        # Return success response
+        return JsonResponse({"message": "Experience added successfully"}, status=201)
     
-   
+    except Exception as e:
+        # Return error response if any exception occurs
+        return JsonResponse({"error": str(e)}, status=400)
     
 
+@csrf_exempt
+@require_http_methods(["PUT"])
+def edit_experience(request, user_id):
+    try:
+        # Retrieve the experience object to be edited based on user_id
+        experience = Experience.objects.get(user_id=user_id)
+        
+        # Load the JSON data from the request body
+        data = json.loads(request.body)
+        
+        # Update the fields if they are present in the request data
+        if 'title' in data:
+            experience.title = data['title']
+        if 'employment_type' in data:
+            experience.employment_type = data['employment_type']
+        if 'company_name' in data:
+            experience.company_name = data['company_name']
+        if 'location' in data:
+            experience.location = data['location']
+        if 'location_type' in data:
+            experience.location_type = data['location_type']
+        if 'start_date' in data:
+            experience.start_date = data['start_date']
+        if 'end_date' in data:
+            experience.end_date = data['end_date']
+        if 'job_description' in data:
+            experience.job_description = data['job_description']
+        if 'skills' in data:
+            experience.skills = data['skills']
+        
+        # Save the changes
+        experience.save()
+        
+        # Return success response
+        return JsonResponse({"message": "Experience updated successfully"}, status=200)
+    
+    except Experience.DoesNotExist:
+        # Return error response if experience does not exist
+        return JsonResponse({"error": "Experience not found for user_id"}, status=404)
+    
+    except Exception as e:
+        # Return error response if any other exception occurs
+        return JsonResponse({"error": str(e)}, status=400)

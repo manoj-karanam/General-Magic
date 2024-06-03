@@ -36,50 +36,31 @@ class UserDetails(models.Model):
         return (self.last_name[:4] + self.birthday.strftime('%Y')).lower()
     
 
+class Experience(models.Model):
+    # Choices for the employment_type field
+    EMPLOYMENT_TYPE_CHOICES = [
+        ('full_time', 'Full-Time'),
+        ('part_time', 'Part-Time'),
+        ('internship', 'Internship'),
+        ('contract', 'Contract'),
+        ('freelance', 'Freelance'),
+    ]
 
-# class Experience(models.Model):
-#     EMPLOYMENT_TYPE_CHOICES = [
-#         ('full-time', 'Full-Time'),
-#         ('part-time', 'Part-Time'),
-#         ('internship', 'Internship'),
-#         ('self-employed', 'Self-Employed'),
-#         ('freelance', 'Freelance'),
-#     ]
-    
-#     LOCATION_TYPE_CHOICES = [
-#         ('on-site', 'On-site'),
-#         ('hybrid', 'Hybrid'),
-#         ('remote', 'Remote'),
-#     ]
+    user_id = models.CharField(max_length=50)
+    title = models.CharField(max_length=100)
+    employment_type = models.CharField(max_length=20, choices=EMPLOYMENT_TYPE_CHOICES)
+    company_name = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
+    LOCATION_TYPES = [
+        ('on_site', 'On-site'),
+        ('hybrid', 'Hybrid'),
+        ('remote', 'Remote'),
+    ]
+    location_type = models.CharField(max_length=10, choices=LOCATION_TYPES)
+    start_date = models.DateField()
+    end_date = models.DateField(null=True, blank=True)
+    job_description = models.TextField()
+    skills = models.TextField()
 
-#     user_id = models.CharField(max_length=50)
-#     title = models.CharField(max_length=255)
-#     employment_type = models.CharField(max_length=50, choices=EMPLOYMENT_TYPE_CHOICES)
-#     company_name = models.CharField(max_length=255)
-#     location = models.CharField(max_length=255)
-#     location_type = models.CharField(max_length=50, choices=LOCATION_TYPE_CHOICES)
-#     start_date = models.DateField()
-#     end_date = models.DateField(null=True, blank=True)
-#     job_description = models.TextField()
-#     skills = models.TextField()
-
-#     def __str__(self):
-#         return f"{self.title} at {self.company_name}"
-    
-
-
-# class Education(models.Model):
-#     user_id = models.OneToOneField(Registration, on_delete=models.CASCADE, primary_key=True, related_name='education')
-#     school_name = models.CharField(max_length=255)
-#     degree = models.CharField(max_length=100)
-#     field_of_study = models.CharField(max_length=100)
-#     start_date = models.DateField()
-#     end_date = models.DateField(null=True, blank=True)
-#     grade = models.CharField(max_length=50, blank=True)
-#     description = models.TextField(blank=True)
-#     skills = models.TextField(blank=True)
-
-#     def __str__(self):
-#         return f"{self.degree} in {self.field_of_study} at {self.school_name}"
-    
-
+    def __str__(self):
+        return f"{self.title} at {self.company_name}"
