@@ -10,7 +10,7 @@ import json
 from django.forms.models import model_to_dict
 from datetime import datetime
 from django.db import IntegrityError
-from backend.models import Registration, UserDetails, Experience
+from backend.models import Registration, UserDetails, Experience, Education
 
 
 
@@ -242,3 +242,85 @@ def edit_experience(request, user_id):
     except Exception as e:
         # Return error response if any other exception occurs
         return JsonResponse({"error": str(e)}, status=400)
+    
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def add_education(request):
+    try:
+        data = json.loads(request.body)
+        
+        # Extracting data from the request JSON
+        user_id = data.get('user_id')
+        institution_name = data.get('institution_name')
+        degree = data.get('degree')
+        field_of_study = data.get('field_of_study')
+        start_date = data.get('start_date')
+        end_date = data.get('end_date')
+        grade = data.get('grade')
+        description = data.get('description')
+        skills = data.get('skills')
+        
+        # Create the education object
+        education = Education.objects.create(
+            user_id=user_id,
+            institution_name=institution_name,
+            degree=degree,
+            field_of_study=field_of_study,
+            start_date=start_date,
+            end_date=end_date,
+            grade=grade,
+            description=description,
+            skills=skills
+        )
+        
+        # Return success response
+        return JsonResponse({"message": "Education details added successfully"}, status=201)
+    
+    except Exception as e:
+        # Return error response if any exception occurs
+        return JsonResponse({"error": str(e)}, status=400)
+    
+
+
+@csrf_exempt
+@require_http_methods(["PUT"])
+def edit_education(request, user_id):
+    try:
+        # Retrieve the education object to be edited
+        education = Education.objects.get(user_id=user_id)
+        
+        # Load the JSON data from the request body
+        data = json.loads(request.body)
+        
+        # Update the fields if they are present in the request data
+        if 'institution_name' in data:
+            education.institution_name = data['institution_name']
+        if 'degree' in data:
+            education.degree = data['degree']
+        if 'field_of_study' in data:
+            education.field_of_study = data['field_of_study']
+        if 'start_date' in data:
+            education.start_date = data['start_date']
+        if 'end_date' in data:
+            education.end_date = data['end_date']
+        if 'grade' in data:
+            education.grade = data['grade']
+        if 'description' in data:
+            education.description = data['description']
+        if 'skills' in data:
+            education.skills = data['skills']
+        
+        # Save the changes
+        education.save()
+        
+        # Return success response
+        return JsonResponse({"message": "Education details updated successfully"}, status=200)
+    
+    except Education.DoesNotExist:
+        # Return error response if education does not exist
+        return JsonResponse({"error": "Education not found"}, status=404)
+    
+    except Exception as e:
+        # Return error response if any other exception occurs
+        return JsonResponse({"error": str(e)}, status=400)    

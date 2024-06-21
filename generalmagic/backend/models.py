@@ -64,3 +64,18 @@ class Experience(models.Model):
 
     def __str__(self):
         return f"{self.title} at {self.company_name}"
+    
+
+class Education(models.Model):
+    user_id = models.CharField(max_length=50)
+    institution_name = models.CharField(max_length=100)
+    degree = models.CharField(max_length=100)
+    field_of_study = models.CharField(max_length=100)
+    start_date = models.DateField()
+    end_date = models.DateField(null=True, blank=True)
+    grade = models.CharField(max_length=50, blank=True)
+    description = models.TextField(blank=True)
+    skills = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.degree} in {self.field_of_study} at {self.institution_name}"    

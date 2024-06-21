@@ -13,5 +13,10 @@ urlpatterns = [
 
     # experience
     path('add_experience/', views.add_experience, name='add_experience'),
-    path('edit_experience/<str:user_id>/', views.edit_experience, name='edit_experience')
+    path('edit_experience/<str:user_id>/', views.edit_experience, name='edit_experience'),
+
+    #education
+    path('add_education/', views.add_education, name='add_education'),
+    path('edit_education/<str:user_id>/', views.edit_education, name='edit_education')
+    
 ]
