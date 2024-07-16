@@ -57,7 +57,7 @@ def user_login(request):
             print("email : " + email)
             if check_password(password, user.password):
                 # Password matches, login successful
-                return JsonResponse({"message": "Login successful"}, status=200)
+                return JsonResponse({"message": "Login successful", "user_id": user.id}, status=200)
             else:
                 # Password does not match
                 return JsonResponse({"error": "Invalid credentials"}, status=400)
